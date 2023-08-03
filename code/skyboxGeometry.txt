@@ -1,0 +1,39 @@
+#version 330
+	layout(points) in; 
+	layout(triangle_strip, max_vertices = 24) out; 
+	out vec3 textureDir; 
+	
+	uniform mat4 projection; 
+	uniform mat4 view; 
+	
+	vec4 verts[] = vec4[8](
+			vec4(-100.0, -100.0, -100.0, 1.0), 
+			vec4(-100.0, -100.0,  100.0, 1.0), 
+			vec4(100.0, -100.0,  100.0, 1.0), 
+			vec4(100.0, -100.0, -100.0, 1.0), 
+			vec4(-100.0,  100.0, -100.0, 1.0), 
+			vec4(-100.0,  100.0,  100.0, 1.0), 
+			vec4(100.0,  100.0,  100.0, 1.0), 
+			vec4(100.0,  100.0, -100.0, 1.0)
+		); 
+	vec4 cubeVerts[] = vec4[24](
+		verts[1], verts[2], verts[0], verts[3], 
+		verts[5], verts[4], verts[6], verts[7], 
+		verts[1], verts[0], verts[5], verts[4], 
+		verts[2], verts[6], verts[3], verts[7], 
+		verts[0], verts[3], verts[4], verts[7], 
+		verts[1], verts[5], verts[2], verts[6]
+	);
+	
+	void main() {
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 4; j++) {
+				vec3 offset = cubeVerts[i * 4 + j].xyz;
+				gl_Position = projection * view * (gl_in[0].gl_Position + vec4(offset, 1));
+				textureDir = cubeVerts[i * 4 + j].xyz;
+	
+				EmitVertex();
+			}
+			EndPrimitive();
+		}
+	}

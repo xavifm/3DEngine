@@ -1,0 +1,28 @@
+﻿  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_sdl_gl3.cpp
+  CompileFromFile.cpp
+  loadModel.cpp
+  main.cpp
+  render.cpp
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(426,48): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(447,48): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(470,32): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(626,48): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(648,48): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(669,32): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(822,48): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(842,48): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(865,32): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(949,48): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(1071,49): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(1089,50): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(1121,32): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(1231,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\render.cpp(1290,31): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
+  Generando código...
+     Creando biblioteca C:\Users\sdasd\Documents\GitHub\3DEngine\x64\Debug\GL_framework.lib y objeto C:\Users\sdasd\Documents\GitHub\3DEngine\x64\Debug\GL_framework.exp
+  GL_framework.vcxproj -> C:\Users\sdasd\Documents\GitHub\3DEngine\x64\Debug\GL_framework.exe
+  0 archivo(s) copiado(s)
+  0 archivo(s) copiado(s)

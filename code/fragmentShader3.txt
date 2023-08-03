@@ -1,0 +1,27 @@
+#version 330
+
+in vec4 vert_Normal;
+in vec4 Normal;
+in vec4 FragPos;
+in vec2 fragmentUV;
+in vec2 textureCoords;
+uniform sampler2D texture1;
+out vec4 out_Color;
+uniform mat4 mv_Mat;
+uniform vec4 lightPos;
+uniform vec4 color;
+uniform vec4 viewPos;
+uniform vec4 lightColor;
+uniform vec4 objectColor;
+
+void main() {
+	vec4 val = texture2D(texture1, textureCoords);
+	if (val.r == 1) 
+	{
+	}
+	else 
+	{
+		out_Color = val;
+	}
+}
+

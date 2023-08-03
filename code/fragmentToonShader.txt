@@ -1,0 +1,36 @@
+#version 330
+in vec4 fragPos;
+in vec4 vert_Normal;
+out vec4 out_Color;
+uniform mat4 mv_Mat;
+uniform vec4 color;
+uniform vec4 ambientColor;
+uniform float light_intensity;
+in vec3 normal;
+uniform vec3 lPos;
+uniform vec4 cubePosition;
+uniform float stipling;
+	void main() {
+	vec4 posLight = mv_Mat * cubePosition;
+	vec4 lightDir = normalize(posLight - fragPos);
+	//float diff = max(dot(norm, lightDir), 0.0)*light_intensity;
+	//vec4 diffuse = vec4(color.xyz * dot(vert_Normal, lightDir) * light_intensity , 0.0);
+float dotDif = dot(vert_Normal,lightDir);
+	if(dotDif <0.2) {
+	dotDif = 0;
+	}
+	else if(dotDif >= 0.2 && dotDif < 0.4){
+		dotDif = 0.2;
+		}
+	else if (dotDif >=0.4 && dotDif < 0.7){
+		dotDif = 0.4;
+	}
+	else if (dotDif >=0.7 ){
+	dotDif = 0.7;
+	}
+	vec4 diffuse = vec4(vec3(1,0,0) * dotDif * light_intensity , 0.0);
+	out_Color = color*(ambientColor+diffuse);
+	float alpha = 1 -stipling;
+	//out_Color = color*(ambientColor+specular+diff);
+	out_Color.a = alpha;
+}

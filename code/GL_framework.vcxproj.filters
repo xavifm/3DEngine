@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\objects\Object.cpp">
+      <Filter>Project\Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\render.cpp">
+      <Filter>Project\Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CompileFromFile.cpp">
+      <Filter>Project\Engine\API</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui.cpp">
+      <Filter>Project\Engine\API</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_demo.cpp">
+      <Filter>Project\Engine\API</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_draw.cpp">
+      <Filter>Project\Engine\API</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl_sdl_gl3.cpp">
+      <Filter>Project\Engine\API</Filter>
+    </ClCompile>
+    <ClCompile Include="src\loadModel.cpp">
+      <Filter>Project\Engine\API</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Project\Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\objects\Object.h">
+      <Filter>Project\Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stb_image.h">
+      <Filter>Project\Engine\API</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Project">
+      <UniqueIdentifier>{b367d432-ae09-460b-804e-7843a3d72db7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Engine">
+      <UniqueIdentifier>{435dd018-452a-4487-bd17-cc933d7bc220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Engine\World">
+      <UniqueIdentifier>{5eb1d43c-e57d-4881-a1f9-d6a774dcaf93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Engine\Render">
+      <UniqueIdentifier>{e21e00f9-405d-4173-83aa-7bb12076bc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Engine\API">
+      <UniqueIdentifier>{b3d0200c-a5e6-4d91-a1e9-c167be74bfb7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

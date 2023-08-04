@@ -6,7 +6,7 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
-#include "stb_image.h"
+#include "scene/api/stb_image.h"
 #include <string>
 #define STB_IMAGE_IMPLEMENTATION
 bool loadOBJ(const char * path,

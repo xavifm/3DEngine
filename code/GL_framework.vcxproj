@@ -141,9 +141,11 @@ xcopy "$(ProjectDir)libs\SDL2.dll" "$(OutDir)" /y /d</Command>
     <ClCompile Include="src\CompileFromFile.cpp" />
     <ClCompile Include="src\loadModel.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\render.cpp" />
+    <ClCompile Include="src\objects\Object.cpp" />
+    <ClCompile Include="src\scene\render.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\objects\Object.h" />
     <ClInclude Include="src\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

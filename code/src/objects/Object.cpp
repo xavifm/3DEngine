@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include "../scene/api/stb_image.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <math.h>
 
 extern GLuint compileShaderFromFile(const char* shaderStr, GLenum shaderType, const char* name = "");
 extern GLuint compileShader(const char* shaderStr, GLenum shaderType, const char* name = "");
@@ -20,6 +21,10 @@ public:
 	char* OBJ = "";
 	char* IMG = "";
 
+	glm::vec3 position = glm::vec3(0, 0, 0);
+	glm::vec3 size = glm::vec3(0, 0, 0);
+	glm::quat rotation = glm::quat(0, 0, 0, 0);
+
 private:
 	glm::vec3 objectColor = glm::vec4(0.f, 0.f, 0.f, 1.f);
 
@@ -36,12 +41,20 @@ private:
 	GLuint fbo;
 	glm::mat4 objectMatrix;
 
-public:
-	void setupObject(char* model, char* referenceName, char* textureImg)
+	glm::mat4 quaternionToMatrix(const glm::quat& q) 
 	{
-		OBJ = model;
-		reference = referenceName;
-		IMG = textureImg;
+		glm::mat4 rotationMatrix = glm::mat4_cast(q);
+		return rotationMatrix;
+	}
+
+public:
+	void setupObject(char* _model, char* _referenceName, char* _textureImg, glm::vec3 _position, glm::vec3 _size)
+	{
+		OBJ = _model;
+		reference = _referenceName;
+		IMG = _textureImg;
+		position = _position;
+		size = _size;
 
 		bool res = loadOBJ(OBJ, vertices, uvs, normals);
 
@@ -81,18 +94,28 @@ public:
 		linkProgram(program);
 
 		objectMatrix = glm::mat4(1.f);
+
+		setupTexture(IMG);
 	}
 
-	void updateObject(glm::mat4 matrix)
+	void updateObject(glm::vec3 _position, glm::vec3 _size, glm::quat& _rotation)
 	{
-		objectMatrix = matrix;
+		position = _position;
+		size = _size;
+		rotation = _rotation;
+
+		glm::mat4 tmatrix = glm::translate(glm::mat4(1.f), position) * glm::scale(glm::mat4(1.f), _size);
+
+		glm::mat4 rmatrix = quaternionToMatrix(rotation);
+
+		objectMatrix = tmatrix * rmatrix;
 	}
 
 	void drawObject()
 	{
 		glBindVertexArray(vao);
 		glUseProgram(program);
-		setupTexture(IMG);
+		//setupTexture(IMG);
 		glUniformMatrix4fv(glGetUniformLocation(program, "objMat"), 1, GL_FALSE, glm::value_ptr(objectMatrix));
 		glUniformMatrix4fv(glGetUniformLocation(program, "mv_Mat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_modelView));
 		glUniformMatrix4fv(glGetUniformLocation(program, "mvpMat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_MVP));
@@ -108,11 +131,11 @@ public:
 		stbi_set_flip_vertically_on_load(true);
 		int x, y, n;
 		unsigned char* dat = stbi_load(img, &x, &y, &n, 3);
+
 		if (dat == NULL)
 			fprintf(stderr, "NO VALID!");
-		else {
+		else { }
 
-		}
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
 

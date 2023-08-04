@@ -1,7 +1,8 @@
 ﻿  Object.cpp
-C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\objects\Object.cpp(99,1): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
-  RenderVars.cpp
+C:\Users\sdasd\Documents\GitHub\3DEngine\code\src\objects\Object.cpp(122,1): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
+  render.cpp
   Generando código...
+     Creando biblioteca C:\Users\sdasd\Documents\GitHub\3DEngine\x64\Debug\GL_framework.lib y objeto C:\Users\sdasd\Documents\GitHub\3DEngine\x64\Debug\GL_framework.exp
   GL_framework.vcxproj -> C:\Users\sdasd\Documents\GitHub\3DEngine\x64\Debug\GL_framework.exe
   0 archivo(s) copiado(s)
   0 archivo(s) copiado(s)

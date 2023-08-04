@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../scene/RenderVars.h"
 #include <vector>
 #include <GL/glew.h>
@@ -80,9 +82,9 @@ public:
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		shaders[0] = compileShaderFromFile("defaultVertexShader.txt", GL_VERTEX_SHADER, strcat(reference,  "Vertex"));
-		shaders[1] = compileShaderFromFile("defaultFragmentShader.txt", GL_FRAGMENT_SHADER, strcat(reference, "Fragment"));
-		shaders[2] = compileShaderFromFile("defaultGeometryShader.txt", GL_GEOMETRY_SHADER, strcat(reference, "GeometryShader"));
+		shaders[0] = compileShaderFromFile("defaultVertexShader.txt", GL_VERTEX_SHADER, "Vertex");
+		shaders[1] = compileShaderFromFile("defaultFragmentShader.txt", GL_FRAGMENT_SHADER, "Fragment");
+		//shaders[2] = compileShaderFromFile("defaultGeometryShader.txt", GL_GEOMETRY_SHADER, strcat(reference, "GeometryShader"));
 
 		program = glCreateProgram();
 		glAttachShader(program, shaders[0]);
@@ -116,6 +118,8 @@ public:
 		glBindVertexArray(vao);
 		glUseProgram(program);
 		//setupTexture(IMG);
+		glm::mat4 _modelView = glm::mat4(1.f);
+		glm::mat4 _MVP = _projection * _modelView;
 		glUniformMatrix4fv(glGetUniformLocation(program, "objMat"), 1, GL_FALSE, glm::value_ptr(objectMatrix));
 		glUniformMatrix4fv(glGetUniformLocation(program, "mv_Mat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_modelView));
 		glUniformMatrix4fv(glGetUniformLocation(program, "mvpMat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_MVP));

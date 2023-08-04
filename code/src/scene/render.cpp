@@ -12,7 +12,9 @@
 #include <string>
 #include <fstream>   
 #include <sstream>  
-#include "api/stb_image.h"
+//#include "api/stb_image.h"
+#include <list>
+#include "../objects/Object.cpp"
 
 glm::vec3 lightPos;
 GLuint fbo;
@@ -85,9 +87,6 @@ void GLmousecb(MouseEvent ev) {
 	RV::prevMouse.lastx = ev.posx;
 	RV::prevMouse.lasty = ev.posy;
 }
-
-extern GLuint compileShaderFromFile(const char* shaderStr, GLenum shaderType, const char* name = "");
-extern GLuint compileShader(const char* shaderStr, GLenum shaderType, const char* name = "");
 
 void linkProgram(GLuint program) 
 {
@@ -1428,6 +1427,66 @@ int cam; float stipling;
 //}
 //END ON HARDCODED ZONE
 
+namespace Scene 
+{
+	std::list<Object*> objects;
+}
+
+void CreateObjectInScene(char* _reference, char* _model, char* _texture, glm::vec3 _position, glm::vec3 _size)
+{
+	Object* obj = new Object();
+	obj->setupObject(_model, _reference, _texture, _position, _size);
+
+	Scene::objects.push_back(obj);
+}
+
+void CreateObjectInScene(char* _reference, char* _texture, glm::vec3 _position, glm::vec3 _size)
+{
+	Object* obj = new Object();
+	obj->setupObject("default.obj", _reference, _texture, _position, _size);
+
+	Scene::objects.push_back(obj);
+}
+
+void CreateObjectInScene(char* _reference, glm::vec3 _position, glm::vec3 _size)
+{
+	Object* obj = new Object();
+	obj->setupObject("default.obj", _reference, NULL, _position, _size);
+
+	Scene::objects.push_back(obj);
+}
+
+
+void RemoveObjectFromScene(char* _reference)
+{
+	for each (Object* obj in Scene::objects)
+	{
+		if(obj->reference == _reference)
+		obj->cleanupObject();
+	}
+}
+
+void RemoveAllObjectsFromScene() 
+{
+	for each (Object* obj in Scene::objects)
+	{
+		obj->cleanupObject();
+	}
+}
+
+void RenderScene() 
+{
+	for each (Object* obj in Scene::objects)
+	{
+		obj->drawObject();
+	}
+}
+
+void DebugTest() 
+{
+	CreateObjectInScene("TEST", glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+}
+
 void GLinit(int width, int height) 
 {
 	glViewport(0, 0, width, height);
@@ -1441,6 +1500,8 @@ void GLinit(int width, int height)
 	RV::height = height;
 	RV::_projection = glm::perspective(RV::FOV, (float)width / (float)height, RV::zNear, RV::zFar);
 	cubePosition = glm::vec3(1,1,1);
+
+	DebugTest();
 	//CarFirstMiddle::setupCar();
 	//CarFirstMiddle::setupTexture4Car();
 	//CarFirstMiddle::setupFBOCar();

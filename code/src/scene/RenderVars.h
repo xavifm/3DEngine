@@ -8,8 +8,8 @@ public:
 	static float FOV;
 	static float zNear;
 	static float zFar;
-	static int width;
-	static int height;
+	static int width; //<- cal enviar el width de la pantalla
+	static int height; //<- cal enviar el height de la pantalla
 	static glm::mat4 _projection;
 	static glm::mat4 _modelView;
 	static glm::mat4 _MVP;

@@ -28,13 +28,16 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Project\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\scene\RenderVars.cpp">
+      <Filter>Project\Engine\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\objects\Object.h">
-      <Filter>Project\Engine\World</Filter>
-    </ClInclude>
     <ClInclude Include="src\stb_image.h">
       <Filter>Project\Engine\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\RenderVars.h">
+      <Filter>Project\Engine\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

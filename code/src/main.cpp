@@ -7,7 +7,6 @@
 
 #include "GL_framework.h"
 
-
 extern void GUI();
 extern void GLmousecb(MouseEvent ev);
 extern void GLResize(int width, int height);
@@ -15,7 +14,6 @@ extern void GLinit(int width, int height);
 extern void GLcleanup();
 extern void GLrender(float dt);
 
-//////
 namespace {
 	const int expected_fps = 30;
 	const double expected_frametime = 1.0 / expected_fps;
@@ -37,6 +35,7 @@ namespace {
 }
 
 int main(int argc, char** argv) {
+
 	//Init GLFW
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());

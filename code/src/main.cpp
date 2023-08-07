@@ -4,11 +4,11 @@
 #include <imgui\imgui.h>
 #include <imgui\imgui_impl_sdl_gl3.h>
 #include <cstdio>
+#include "scene/RenderVars.h"
 
 #include "GL_framework.h"
 
 extern void GUI();
-extern void GLmousecb(MouseEvent ev);
 extern void GLResize(int width, int height);
 extern void GLinit(int width, int height);
 extern void GLcleanup();
@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
 				(io.MouseDown[1] ? MouseEvent::Button::Right :
 				(io.MouseDown[2] ? MouseEvent::Button::Middle :
 				MouseEvent::Button::None)))};
-			GLmousecb(ev);
+			RenderVariables::GLmousecb(ev);
 		}
 		GLrender((float)expected_frametime);
 

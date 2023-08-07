@@ -118,8 +118,6 @@ public:
 		glBindVertexArray(vao);
 		glUseProgram(program);
 		//setupTexture(IMG);
-		glm::mat4 _modelView = glm::mat4(1.f);
-		glm::mat4 _MVP = _projection * _modelView;
 		glUniformMatrix4fv(glGetUniformLocation(program, "objMat"), 1, GL_FALSE, glm::value_ptr(objectMatrix));
 		glUniformMatrix4fv(glGetUniformLocation(program, "mv_Mat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_modelView));
 		glUniformMatrix4fv(glGetUniformLocation(program, "mvpMat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_MVP));

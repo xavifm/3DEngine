@@ -15,6 +15,7 @@
 //#include "api/stb_image.h"
 #include <list>
 #include "../objects/Object.cpp"
+#include "../scene/RenderVars.h"
 
 glm::vec3 lightPos;
 GLuint fbo;
@@ -29,7 +30,7 @@ namespace ImGui {
 
 float lightIntensity;
 
-namespace RenderVars {
+/*namespace RenderVars {
 	const float FOV = glm::radians(65.f);
 	const float zNear = 1.f;
 	const float zFar = 50.f;
@@ -50,21 +51,20 @@ namespace RenderVars {
 	float panv[3] = { 0.f, -5.f, -15.f };
 	float rota[2] = { 0.f, 0.f };
 }
-namespace RV = RenderVars;
+namespace RV = RenderVars;*/
 
 void GLResize(int width, int height) {
 	glViewport(0, 0, width, height);
 
-	RV::width = width;
-	RV::height = height;
-	if (height != 0) RV::_projection = glm::perspective(RV::FOV, (float)width / (float)height, RV::zNear, RV::zFar);
-	else RV::_projection = glm::perspective(RV::FOV, 0.f, RV::zNear, RV::zFar);
+	//RV::width = width;
+	//RV::height = height;
+	RenderVariables::SetupRenderVars(width, height);
 }
 
-void GLmousecb(MouseEvent ev) {
-	if (RV::prevMouse.waspressed && RV::prevMouse.button == ev.button) {
-		float diffx = ev.posx - RV::prevMouse.lastx;
-		float diffy = ev.posy - RV::prevMouse.lasty;
+/*void GLmousecb(MouseEvent ev) {
+	if (RenderVariables::prevMouse.waspressed && RenderVariables::prevMouse.button == ev.button) {
+		float diffx = ev.posx - RenderVariables::prevMouse.lastx;
+		float diffy = ev.posy - RenderVariables::prevMouse.lasty;
 		switch (ev.button) {
 		case MouseEvent::Button::Left: // ROTATE
 			RV::rota[0] += diffx * 0.005f;
@@ -86,7 +86,7 @@ void GLmousecb(MouseEvent ev) {
 	}
 	RV::prevMouse.lastx = ev.posx;
 	RV::prevMouse.lasty = ev.posy;
-}
+}*/
 
 void linkProgram(GLuint program) 
 {
@@ -195,7 +195,7 @@ namespace Axis {
 	void drawAxis() {
 		glBindVertexArray(AxisVao);
 		glUseProgram(AxisProgram);
-		glUniformMatrix4fv(glGetUniformLocation(AxisProgram, "mvpMat"), 1, GL_FALSE, glm::value_ptr(RV::_MVP));
+		glUniformMatrix4fv(glGetUniformLocation(AxisProgram, "mvpMat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_MVP));
 		glDrawElements(GL_LINES, 6, GL_UNSIGNED_BYTE, 0);
 
 		glUseProgram(0);
@@ -287,8 +287,8 @@ namespace SkyBox {
 		glBindVertexArray(VAO);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapID);
 
-		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(RV::_projection));
-		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, glm::value_ptr(RV::_inv_modelview));
+		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_projection));
+		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_inv_modelview));
 
 		glDrawArrays(GL_POINTS, 0, 1);
 	}
@@ -1496,10 +1496,10 @@ void GLinit(int width, int height)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	SkyBox::init();
-	RV::width = width;
-	RV::height = height;
-	RV::_projection = glm::perspective(RV::FOV, (float)width / (float)height, RV::zNear, RV::zFar);
+
+	RenderVariables::SetupRenderVars(width, height);
 	cubePosition = glm::vec3(1,1,1);
+
 
 	DebugTest();
 	//CarFirstMiddle::setupCar();
@@ -1527,16 +1527,7 @@ void GLrender(float dt)
 		glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		RV::_modelView = glm::mat4(1.f);
-
-		RV::_modelView = glm::translate(RV::_modelView,
-			glm::vec3(RV::panv[0], RV::panv[1], RV::panv[2]));
-		RV::_modelView = glm::rotate(RV::_modelView, RV::rota[1],
-			glm::vec3(1.f, 0.f, 0.f));
-		RV::_modelView = glm::rotate(RV::_modelView, RV::rota[0],
-			glm::vec3(0.f, 1.f, 0.f));
-
-		RV::_MVP = RV::_projection * RV::_modelView;
+		RenderVariables::GLRender();
 
 		glDepthMask(GL_FALSE);
 		SkyBox::render();

@@ -1456,6 +1456,14 @@ void CreateObjectInScene(char* _reference, glm::vec3 _position, glm::vec3 _size)
 	Scene::objects.push_back(obj);
 }
 
+Object* GetObjectFromScene(char* _reference) 
+{
+	for each (Object* obj in Scene::objects)
+	{
+		if (obj->reference == _reference)
+			return obj;
+	}
+}
 
 void RemoveObjectFromScene(char* _reference)
 {
@@ -1478,13 +1486,18 @@ void RenderScene()
 {
 	for each (Object* obj in Scene::objects)
 	{
+		std::cout << obj->OBJ << std::endl;
+		std::cout << obj->position.x << std::endl;
+		std::cout << obj->position.y << std::endl;
+		std::cout << obj->position.z << std::endl;
+		std::cout << obj->reference << std::endl;
 		obj->drawObject();
 	}
 }
 
 void DebugTest() 
 {
-	CreateObjectInScene("TEST", glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	CreateObjectInScene("TEST", glm::vec3(0, 2, 0), glm::vec3(1, 1, 1));
 }
 
 void GLinit(int width, int height) 
@@ -1522,6 +1535,10 @@ void GLinit(int width, int height)
 	//WindowCar::setupWindowCar();
 }
 
+//TEST
+float zPos = 0;
+//TEST
+
 void GLrender(float dt) 
 {
 		glClearColor(0.2f, 0.2f, 0.2f, 1.f);
@@ -1535,8 +1552,15 @@ void GLrender(float dt)
 
 		//Retrovisor::drawObject(NULL);
 		//LLISTA PER CRIDAR ELS SEUS DRAWS
+		RenderScene();
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		//TEST MOVEMENT
+		GetObjectFromScene("TEST")->SetPosition(0, 0, zPos);
+		GetObjectFromScene("TEST")->SetRotationQuat(zPos, zPos, 0, 1);
+		zPos += 0.001f;
+
 		//Trees::drawTreeObject();
 		//glm::mat4 t = glm::translate(glm::mat4(1.f), glm::vec3(carPos.x, carPos.y, carPos.z));
 		//glm::mat4 r = glm::rotate(glm::mat4(1.f), glm::radians(180.f), glm::vec3(0, 1, 0));
@@ -1560,6 +1584,7 @@ void GLcleanup()
 	//Dragon::cleanupDragon();
 	//WindowCar::cleanupWindowCar();
 	//LLISTA PER FER CLEANUP
+	RemoveAllObjectsFromScene();
 	SkyBox::cleanup();
 }
 

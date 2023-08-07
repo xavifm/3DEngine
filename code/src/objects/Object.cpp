@@ -95,9 +95,16 @@ public:
 		glBindAttribLocation(program, 2, "in_Tex");
 		linkProgram(program);
 
-		objectMatrix = glm::mat4(1.f);
+		//objectMatrix = glm::mat4(1.f);
+
+		updateObject(position, size, rotation);
 
 		setupTexture(IMG);
+	}
+
+	void updateObject() 
+	{
+		updateObject(position, size, rotation);
 	}
 
 	void updateObject(glm::vec3 _position, glm::vec3 _size, glm::quat& _rotation)
@@ -111,6 +118,18 @@ public:
 		glm::mat4 rmatrix = quaternionToMatrix(rotation);
 
 		objectMatrix = tmatrix * rmatrix;
+	}
+
+	void SetPosition(float x, float y, float z) 
+	{
+		position = glm::vec3(x, y, z);
+		updateObject();
+	}
+
+	void SetRotationQuat(float x, float y, float z, float w) 
+	{
+		rotation = glm::quat(x, y, z, w);
+		updateObject();
 	}
 
 	void drawObject()

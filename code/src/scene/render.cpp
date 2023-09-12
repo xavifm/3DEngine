@@ -1497,7 +1497,8 @@ void RenderScene()
 
 void DebugTest() 
 {
-	CreateObjectInScene("TEST", glm::vec3(0, 2, 0), glm::vec3(1, 1, 1));
+	//CreateObjectInScene("TEST", glm::vec3(0, 2, 0), glm::vec3(1, 1, 1));
+	CreateObjectInScene("TEST", "back.png", glm::vec3(0, 2, 0), glm::vec3(2, 1, 1));
 }
 
 void GLinit(int width, int height) 
@@ -1515,24 +1516,6 @@ void GLinit(int width, int height)
 
 
 	DebugTest();
-	//CarFirstMiddle::setupCar();
-	//CarFirstMiddle::setupTexture4Car();
-	//CarFirstMiddle::setupFBOCar();
-	//CarSecondMiddle::setupCar();
-	//CarSecondMiddle::setupTexture4Car();
-	//CarSecondMiddle::setupFBOCar();
-	//Trees::setupTree();
-	//Trees::setupTexture4Tree();
-	//Trees::setupFBOTree();
-	//cam = 1;
-	//Retrovisor::setupFBORetrovisor();
-	//Ground::setupGround();
-	//Ground::setupTexture4Ground();
-	//Ground::setupFBOGround();
-	//Dragon::setupDragon();
-	//Retrovisor::setupObject();
-	//Axis::setupAxis();	
-	//WindowCar::setupWindowCar();
 }
 
 //TEST
@@ -1590,26 +1573,26 @@ void GLcleanup()
 
 void GUI() 
 {
-	bool show = true;
-	ImGui::Begin("Physics Parameters", &show, 4);
-	{
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		if (ImGui::Button("Cam 1")) 
-		{
-			cam = 1;
-		}	
-		if (ImGui::Button("Cam 2")) 
-		{
-			cam = 2;
-		}
-		ImGui::SliderFloat("Transparency window car", &stipling, 0, 1);
-	}
-	ImGui::End();
+	//bool show = true;
+	//ImGui::Begin("Physics Parameters", &show, 4);
+	//{
+	//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	//	if (ImGui::Button("Cam 1")) 
+	//	{
+	//		cam = 1;
+	//	}	
+	//	if (ImGui::Button("Cam 2")) 
+	//	{
+	//		cam = 2;
+	//	}
+	//	ImGui::SliderFloat("Transparency window car", &stipling, 0, 1);
+	//}
+	//ImGui::End();
 
-	bool show_test_window = false;
-	if (show_test_window) 
-	{
-		ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiSetCond_FirstUseEver);
-		ImGui::ShowTestWindow(&show_test_window);
-	}
+	//bool show_test_window = false;
+	//if (show_test_window) 
+	//{
+	//	ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiSetCond_FirstUseEver);
+	//	ImGui::ShowTestWindow(&show_test_window);
+	//}
 }

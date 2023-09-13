@@ -6,6 +6,7 @@
 #include "../scene/api/stb_image.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <math.h>
+#include <algorithm>
 
 extern GLuint compileShaderFromFile(const char* shaderStr, GLenum shaderType, const char* name = "");
 extern GLuint compileShader(const char* shaderStr, GLenum shaderType, const char* name = "");
@@ -115,7 +116,7 @@ public:
 
 		glm::mat4 tmatrix = glm::translate(glm::mat4(1.f), position) * glm::scale(glm::mat4(1.f), _size);
 
-		glm::mat4 rmatrix = quaternionToMatrix(rotation);
+		glm::mat4 rmatrix = glm::mat4_cast(rotation);
 
 		objectMatrix = tmatrix * rmatrix;
 	}
@@ -126,16 +127,11 @@ public:
 		updateObject();
 	}
 
-	void SetRotationQuat(float x, float y, float z, float w) 
+	void SetRotationVector(float x, float y, float z) 
 	{
-		rotation = glm::quat(x, y, z, w);
+		glm::vec3 rotationVec(x, y, z);
+		rotation = glm::quat(rotationVec);
 		updateObject();
-
-		//GLint mvMatLocation = glGetUniformLocation(shaders[0], "mv_Mat");
-		//GLint mvpMatLocation = glGetUniformLocation(shaders[0], "mvpMat");
-		//glUseProgram(shaders[0]);
-		//glUniformMatrix4fv(mvMatLocation, 1, GL_FALSE, glm::value_ptr(objectMatrix));
-		//glUniformMatrix4fv(mvpMatLocation, 1, GL_FALSE, glm::value_ptr(objectMatrix));
 	}
 
 	void drawObject()
@@ -147,6 +143,7 @@ public:
 		glUniformMatrix4fv(glGetUniformLocation(program, "mv_Mat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_modelView));
 		glUniformMatrix4fv(glGetUniformLocation(program, "mvpMat"), 1, GL_FALSE, glm::value_ptr(RenderVariables::_MVP));
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
 		glUseProgram(0);
 		glBindVertexArray(0);
 	}
